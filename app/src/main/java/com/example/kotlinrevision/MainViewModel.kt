@@ -34,16 +34,14 @@ class MainViewModel @Inject constructor(private val repo: RetrofitInterface): Vi
                         else
                             _title.value = Resource.Error("Error ${throwable.code()}: ${throwable.message()}")
                     }
-                    is IOException
-                    -> _title.value = Resource.Error("No internet connection!")
-                    else
-                    -> _title.value = Resource.Error("Unexpected error occurred")
+                    is IOException -> _title.value = Resource.Error("No internet connection!")
+                    else -> _title.value = Resource.Error("Unexpected error occurred")
                 }
             }
         }
     }
 
-    //TODO: uncomment the following and comment the previous code when working with LiveData
+    //TODO: use the following instead of the previous code when working with LiveData
 
 //    private val _title = MutableLiveData<Resource<String>>()
 //    val title: LiveData<Resource<String>>

@@ -43,31 +43,32 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
 
-            //TODO: uncomment the following and comment the previous code when working with LiveData
-//            activityViewModel.title.observe(this@MainActivity) {
-//               if (it is Resource.Loading){
-//                   binding.progressBar.isVisible = true
-//                   binding.text.isVisible = false
-//               } else {
-//                   binding.progressBar.isVisible = false
-//                   binding.text.isVisible = true
-//                   if(it is Resource.Error){
-//                       binding.text.setTextColor(Color.parseColor("#FF0000"))
-//                       binding.text.text = it.error
-//                   } else {
-//                       binding.text.setTextColor(Color.parseColor("#000000"))
-//                       binding.text.text = it.data
-//                   }
-//               }
+        //TODO: use the following instead of the previous coroutine when working with LiveData
+
+//        activityViewModel.title.observe(this@MainActivity) {
+//            if (it is Resource.Loading){
+//                binding.progressBar.isVisible = true
+//                binding.text.isVisible = false
+//            } else {
+//                binding.progressBar.isVisible = false
+//                binding.text.isVisible = true
+//                if(it is Resource.Error){
+//                    binding.text.setTextColor(Color.parseColor("#FF0000"))
+//                    binding.text.text = it.error
+//                } else {
+//                    binding.text.setTextColor(Color.parseColor("#000000"))
+//                    binding.text.text = it.data
+//                }
 //            }
-            }
+//        }
 
-            binding.refresher.setOnRefreshListener {
-                Timer().schedule(1000) {
-                    activityViewModel.getTitle()
-                    binding.refresher.isRefreshing = false
-                }
+        binding.refresher.setOnRefreshListener {
+            Timer().schedule(1000) {
+                activityViewModel.getTitle()
+                binding.refresher.isRefreshing = false
             }
         }
     }
+}
