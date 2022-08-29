@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,6 +42,8 @@ class MainViewModel @Inject constructor(private val repo: RetrofitInterface): Vi
             }
         }
     }
+
+    //TODO: uncomment the following and comment the previous code when working with LiveData
 
 //    private val _title = MutableLiveData<Resource<String>>()
 //    val title: LiveData<Resource<String>>

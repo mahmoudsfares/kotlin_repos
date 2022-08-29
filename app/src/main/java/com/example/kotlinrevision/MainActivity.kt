@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+
+            //TODO: uncomment the following and comment the previous code when working with LiveData
 //            activityViewModel.title.observe(this@MainActivity) {
 //               if (it is Resource.Loading){
 //                   binding.progressBar.isVisible = true
