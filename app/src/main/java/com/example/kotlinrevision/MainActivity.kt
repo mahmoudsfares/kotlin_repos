@@ -9,6 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.kotlinrevision.data.Resource
 import com.example.kotlinrevision.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+import kotlin.concurrent.schedule
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -16,15 +18,15 @@ class MainActivity : AppCompatActivity() {
     private val activityViewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
+        activityViewModel.getTitle()
+
         lifecycleScope.launchWhenStarted {
-            activityViewModel.getTitle()
             activityViewModel.title.observe(this@MainActivity) {
                if (it is Resource.Loading){
                    binding.progressBar.isVisible = true
@@ -40,6 +42,13 @@ class MainActivity : AppCompatActivity() {
                        binding.text.text = it.data
                    }
                }
+            }
+        }
+
+        binding.refresher.setOnRefreshListener {
+            Timer().schedule(1000){
+                activityViewModel.getTitle()
+                binding.refresher.isRefreshing = false
             }
         }
     }
