@@ -1,4 +1,4 @@
-package com.example.kotlinrevision
+package com.example.kotlinrepos
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import com.example.kotlinrevision.networking.Resource
-import com.example.kotlinrevision.databinding.ActivityMainBinding
+import com.example.kotlinrepos.networking.Resource
+import com.example.kotlinrepos.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import kotlin.concurrent.schedule

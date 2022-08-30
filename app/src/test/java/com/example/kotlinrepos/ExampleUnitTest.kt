@@ -1,4 +1,4 @@
-package com.example.kotlinrevision
+package com.example.kotlinrepos
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.example.kotlinrevision.networking
+package com.example.kotlinrepos.networking
 
 sealed class Resource<T>(
     val data: T? = null,

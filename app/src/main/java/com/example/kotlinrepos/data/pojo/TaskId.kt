@@ -1,4 +1,4 @@
-package com.example.kotlinrevision.data.pojo
+package com.example.kotlinrepos.data.pojo
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

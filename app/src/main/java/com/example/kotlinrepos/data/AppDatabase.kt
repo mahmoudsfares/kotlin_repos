@@ -1,8 +1,8 @@
-package com.example.kotlinrevision.data
+package com.example.kotlinrepos.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.kotlinrevision.data.pojo.TaskId
+import com.example.kotlinrepos.data.pojo.TaskId
 
 
 @Database(

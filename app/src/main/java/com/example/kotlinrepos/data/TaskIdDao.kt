@@ -1,7 +1,7 @@
-package com.example.kotlinrevision.data
+package com.example.kotlinrepos.data
 
 import androidx.room.*
-import com.example.kotlinrevision.data.pojo.TaskId
+import com.example.kotlinrepos.data.pojo.TaskId
 
 @Dao
 interface TaskIdDao {

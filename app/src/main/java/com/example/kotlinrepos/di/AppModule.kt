@@ -1,10 +1,10 @@
-package com.example.kotlinrevision.di
+package com.example.kotlinrepos.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.kotlinrevision.BuildConfig
-import com.example.kotlinrevision.data.AppDatabase
-import com.example.kotlinrevision.networking.RetrofitInterface
+import com.example.kotlinrepos.BuildConfig
+import com.example.kotlinrepos.data.AppDatabase
+import com.example.kotlinrepos.networking.RetrofitInterface
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
