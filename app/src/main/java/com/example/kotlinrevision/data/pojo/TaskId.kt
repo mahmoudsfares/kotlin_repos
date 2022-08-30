@@ -4,11 +4,11 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "UserId")
-data class UserId (
+@Entity(tableName = "TaskId")
+data class TaskId(
+    @ColumnInfo(name = "task_id")
+    val taskId: Int
+) {
     @PrimaryKey(autoGenerate = true)
-    val i: Int,
-
-    @ColumnInfo(name = "user_id")
-    val userId: Int
-)
+    var i: Int = 0
+}

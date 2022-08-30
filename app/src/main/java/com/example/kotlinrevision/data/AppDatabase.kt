@@ -2,14 +2,14 @@ package com.example.kotlinrevision.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.kotlinrevision.data.pojo.UserId
+import com.example.kotlinrevision.data.pojo.TaskId
 
 
 @Database(
-    entities = [UserId::class],
+    entities = [TaskId::class],
     version = 1,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun getUserIdDao(): UserIdDao
+    abstract fun getTaskIdDao(): TaskIdDao
 }

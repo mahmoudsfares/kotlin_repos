@@ -15,7 +15,7 @@ import kotlin.concurrent.schedule
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val activityViewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,10 +24,10 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        activityViewModel.getTitle()
+        viewModel.getTitle()
 
         lifecycleScope.launchWhenStarted {
-            activityViewModel.title.collect {
+            viewModel.title.collect {
                 if (it is Resource.Loading) {
                     binding.progressBar.isVisible = true
                     binding.text.isVisible = false
@@ -66,8 +66,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.refresher.setOnRefreshListener {
             Timer().schedule(1000) {
-                activityViewModel.getTitle()
+                viewModel.getTitle()
                 binding.refresher.isRefreshing = false
+            }
+        }
+
+        binding.submitBtn.setOnClickListener {
+            if(binding.idEt.text.isNotEmpty()) {
+                viewModel.updateSelectedTaskId(binding.idEt.text.toString())
             }
         }
     }
