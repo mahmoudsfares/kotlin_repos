@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kotlinrevision.data.AppDatabase
-import com.example.kotlinrevision.data.Resource
-import com.example.kotlinrevision.data.TaskIdDao
+import com.example.kotlinrevision.networking.Resource
 import com.example.kotlinrevision.data.pojo.TaskId
 import com.example.kotlinrevision.networking.RetrofitInterface
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,10 +25,12 @@ class MainViewModel @Inject constructor(private val repo: RetrofitInterface, pri
         get() = _title
 
     fun getTitle() {
+        // database calls can't be executed on the main thread
         viewModelScope.launch (Dispatchers.IO){
             _title.value = Resource.Loading()
             try {
                 val taskId = database.getTaskIdDao().getSavedId()
+                // no saved users
                 if(taskId == null)
                     _title.value = Resource.Success(repo.getTitle(1).title)
                 else
@@ -49,14 +50,6 @@ class MainViewModel @Inject constructor(private val repo: RetrofitInterface, pri
         }
     }
 
-    fun updateSelectedTaskId(taskId: String){
-        viewModelScope.launch {
-            database.getTaskIdDao().clear()
-            database.getTaskIdDao().insert(TaskId(taskId.toInt()))
-            getTitle()
-        }
-    }
-
     //TODO: use the following instead of the previous code when working with LiveData
 
 //    private val _title = MutableLiveData<Resource<String>>()
@@ -64,10 +57,17 @@ class MainViewModel @Inject constructor(private val repo: RetrofitInterface, pri
 //        get() = _title
 //
 //    fun getTitle() {
-//        viewModelScope.launch {
+//        // database calls can't be executed on the main thread
+//        viewModelScope.launch (Dispatchers.IO){
 //            _title.postValue(Resource.Loading())
 //            try {
-//                _title.postValue(Resource.Success(repo.getTitle().title))
+//                val taskId = database.getTaskIdDao().getSavedId()
+//                // no saved users
+//                if(taskId == null)
+//                    // (_title.value = value) won't work off of the main thread
+//                    _title.postValue(Resource.Success(repo.getTitle(1).title))
+//                else
+//                    _title.postValue(Resource.Success(repo.getTitle(taskId.taskId).title))
 //            }
 //            catch (throwable: Throwable){
 //                when(throwable){
@@ -85,4 +85,12 @@ class MainViewModel @Inject constructor(private val repo: RetrofitInterface, pri
 //            }
 //        }
 //    }
+
+    fun updateSelectedTaskId(taskId: String){
+        viewModelScope.launch {
+            database.getTaskIdDao().clear()
+            database.getTaskIdDao().insert(TaskId(taskId.toInt()))
+            getTitle()
+        }
+    }
 }

@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import com.example.kotlinrevision.data.Resource
+import com.example.kotlinrevision.networking.Resource
 import com.example.kotlinrevision.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getTitle()
 
+        // flows are not lifecycle aware
         lifecycleScope.launchWhenStarted {
             viewModel.title.collect {
                 if (it is Resource.Loading) {
@@ -47,7 +48,8 @@ class MainActivity : AppCompatActivity() {
 
         //TODO: use the following instead of the previous coroutine when working with LiveData
 
-//        activityViewModel.title.observe(this@MainActivity) {
+//        // livedata is lifecycle aware so there's no need for coroutine scope
+//        viewModel.title.observe(this@MainActivity) {
 //            if (it is Resource.Loading){
 //                binding.progressBar.isVisible = true
 //                binding.text.isVisible = false
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         binding.refresher.setOnRefreshListener {
+            // added a bit of a delay to show the refresh visuals when the view is swiped down
             Timer().schedule(1000) {
                 viewModel.getTitle()
                 binding.refresher.isRefreshing = false
