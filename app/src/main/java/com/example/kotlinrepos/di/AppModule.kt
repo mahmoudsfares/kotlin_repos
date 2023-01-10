@@ -42,7 +42,7 @@ object Module {
         return OkHttpClient.Builder()
             .connectTimeout(20, TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
-            .addInterceptor(httpLoggingInterceptor) // For HTTP request & Response data logging
+            .addInterceptor(httpLoggingInterceptor)
             .build()
     }
 

@@ -14,6 +14,8 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repo: RetrofitInterface, private val database: AppDatabase): ViewModel() {
