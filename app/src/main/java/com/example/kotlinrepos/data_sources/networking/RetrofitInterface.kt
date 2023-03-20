@@ -1,6 +1,6 @@
-package com.example.kotlinrepos.networking
+package com.example.kotlinrepos.data_sources.networking
 
-import com.example.kotlinrepos.networking.dto.ServerResponseDTO
+import com.example.kotlinrepos.data.dto.ServerResponseDTO
 import retrofit2.http.GET
 import retrofit2.http.Path
 

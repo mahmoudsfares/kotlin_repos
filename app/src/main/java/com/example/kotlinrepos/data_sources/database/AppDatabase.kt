@@ -1,4 +1,4 @@
-package com.example.kotlinrepos.data
+package com.example.kotlinrepos.data_sources.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

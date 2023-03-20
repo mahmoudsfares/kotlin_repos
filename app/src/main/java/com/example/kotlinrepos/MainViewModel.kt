@@ -1,21 +1,22 @@
 package com.example.kotlinrepos
 
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kotlinrepos.data.AppDatabase
-import com.example.kotlinrepos.networking.Resource
+import com.example.kotlinrepos.data_sources.database.AppDatabase
+import com.example.kotlinrepos.data.Resource
 import com.example.kotlinrepos.data.pojo.TaskId
-import com.example.kotlinrepos.networking.RetrofitInterface
+import com.example.kotlinrepos.data_sources.networking.RetrofitInterface
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repo: RetrofitInterface, private val database: AppDatabase): ViewModel() {

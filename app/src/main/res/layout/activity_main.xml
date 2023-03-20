@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/submitBtn"
         android:hint="id"
-        />
+        tools:ignore="Autofill,HardcodedText" />
 
     <Button
         android:id="@+id/submitBtn"
@@ -29,7 +29,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/idEt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/idEt"
-        app:layout_constraintTop_toTopOf="@+id/idEt" />
+        app:layout_constraintTop_toTopOf="@+id/idEt"
+        tools:ignore="HardcodedText" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refresher"
