@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kotlinrepos.data_sources.database.AppDatabase
 import com.example.kotlinrepos.data.Resource
-import com.example.kotlinrepos.data.pojo.TaskId
 import com.example.kotlinrepos.data_sources.networking.RetrofitInterface
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -13,8 +12,7 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import com.example.kotlinrepos.data.pojo.Task
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -30,12 +28,12 @@ class MainViewModel @Inject constructor(private val repo: RetrofitInterface, pri
         viewModelScope.launch (Dispatchers.IO){
             _title.value = Resource.Loading()
             try {
-                val taskId = database.getTaskIdDao().getSavedId()
+                val task = database.getTaskIdDao().getSavedId()
                 // no saved users
-                if(taskId == null)
+                if(task == null)
                     _title.value = Resource.Success(repo.getTitle(1).title)
                 else
-                    _title.value = Resource.Success(repo.getTitle(taskId.taskId).title)
+                    _title.value = Resource.Success(repo.getTitle(task.id).title)
             } catch (throwable: Throwable) {
                 when (throwable) {
                     is HttpException -> {
@@ -90,7 +88,7 @@ class MainViewModel @Inject constructor(private val repo: RetrofitInterface, pri
     fun updateSelectedTaskId(taskId: String){
         viewModelScope.launch {
             database.getTaskIdDao().clear()
-            database.getTaskIdDao().insert(TaskId(taskId.toInt()))
+            database.getTaskIdDao().insert(Task(taskId.toInt()))
             getTitle()
         }
     }
